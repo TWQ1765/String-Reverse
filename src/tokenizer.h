@@ -1,14 +1,13 @@
 #ifndef _TOKENIZER_H
 #define _TOKENIZER_H
-
+#include "tokenizerstring.h"
 typedef enum{
-  
- IDENTIFIER, 
+  IDENTIFIER, 
   INT_NUM,
-FLOAT_NUM,
-OPERATOR,
-Token_type;
-}
+  FLOAT_NUM,
+  OPERATOR
+}TokenType;
+
 
 //Generic token
 typedef struct Token Token;
@@ -17,31 +16,30 @@ struct Token {
   void *data;
 };
 
-/
+
 typedef struct TokenId TokenId;
 struct TokenId {
   TokenType id;
   char* name;
 };
-typedef struct TokenInt TokenInt;
+typedef struct TokenInt TokenInt;//integer
 struct TokenInt {
   TokenType id;
   int value;
 };
-typedef struct TokenFloat TokenFloat;
+typedef struct TokenFloat TokenFloat;//Float
 struct TokenFloat {
   TokenType id;
   double value;
 };  
-typedef struct TokenOp TokenOp;
+typedef struct TokenOp TokenOp;//operator!
 struct TokenOp {
   TokenType id;
   Token *left;
   Token *right;
 };  
-typedef struct String TokenizerString;
-struct TokenizerString {
-  char *data;
-  int index;
-};  
+
+
+Token *tokenize(TokenizerString *str);
+ 
 #endif // _TOKENIZER_H
